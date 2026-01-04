@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Risk Assessment - Denar Financial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #000000;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #008080;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #cccccc;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            color: #000000;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #008080;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #008080;
+        }
+
+        .form-group small {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .subsection {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .btn {
+            background: #008080;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #006666;
+        }
+
+        .results {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .score-card {
+            background: linear-gradient(135deg, #008080 0%, #006666 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .grade {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: white;
+            margin: 1rem 0;
+        }
+
+        .grade-A { color: #28a745; }
+        .grade-B { color: #17a2b8; }
+        .grade-C { color: #ffc107; }
+        .grade-D { color: #fd7e14; }
+        .grade-F { color: #dc3545; }
+
+        .findings {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .finding-item {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .finding-critical { 
+            background: #f8d7da; 
+            border-left-color: #dc3545; 
+        }
+
+        .finding-high { 
+            background: #fff3cd; 
+            border-left-color: #fd7e14; 
+        }
+
+        .finding-medium { 
+            background: #d1ecf1; 
+            border-left-color: #17a2b8; 
+        }
+
+        .finding-low { 
+            background: #d4edda; 
+            border-left-color: #28a745; 
+        }
+
+        .finding-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .finding-impact {
+            font-weight: 600;
+            color: #000;
+            margin-top: 0.5rem;
+        }
+
+        .lead-capture {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border: 2px solid #008080;
+            text-align: center;
+        }
+
+        .lead-capture h3 {
+            color: #000000;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .airtable-btn {
+            display: inline-block;
+            background: #008080;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 1rem 0;
+        }
+
+        .airtable-btn:hover {
+            background: #006666;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="Denar Financial">
+                Denar Financial
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="calculator.html">FX Calculator</a></li>
+                <li><a href="insurance.html">Insurance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">AI-Powered Insurance Risk Assessment</h1>
+        <p class="subtitle">Independent broker performance analysis & coverage gap identification</p>
+
+        <!-- Part 1: Broker Performance -->
+        <section class="section">
+            <h2 class="section-title">Part 1: Broker Performance Assessment</h2>
+            <p class="section-subtitle">Evaluate if your insurance broker is delivering value or costing you money</p>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="yearsWithBroker">Years with Current Broker</label>
+                    <input type="number" id="yearsWithBroker" placeholder="e.g., 8">
+                </div>
+
+                <div class="form-group">
+                    <label for="totalPremiumCurrent">Total Annual Premium (All Policies)</label>
+                    <input type="number" id="totalPremiumCurrent" placeholder="e.g., 250000">
+                    <small>Current year total across all insurance policies</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="totalPremium5Years">Total Annual Premium 5 Years Ago</label>
+                    <input type="number" id="totalPremium5Years" placeholder="e.g., 180000">
+                    <small>If known - leave blank if unsure</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="numberOfPolicies">Number of Policies</label>
+                    <input type="number" id="numberOfPolicies" placeholder="e.g., 6">
+                </div>
+
+                <div class="form-group">
+                    <label for="claimsLast5Years">Had Significant Claims (Past 5 Years)?</label>
+                    <select id="claimsLast5Years">
+                        <option value="none">No significant claims</option>
+                        <option value="one">1 claim</option>
+                        <option value="two">2 claims</option>
+                        <option value="multiple">3+ claims</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastRFP">Last Time You RFP'd Insurance</label>
+                    <select id="lastRFP">
+                        <option value="never">Never</option>
+                        <option value="1year">Within last year</option>
+                        <option value="2-3years">2-3 years ago</option>
+                        <option value="4-5years">4-5 years ago</option>
+                        <option value="5plus">5+ years ago</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 2: Company Profile -->
+        <section class="section">
+            <h2 class="section-title">Part 2: Coverage Gap Analysis</h2>
+            <p class="section-subtitle">Identify missing or insufficient coverage based on your operations</p>
+
+            <div class="subsection">
+                <div class="subsection-title">Basic Company Profile</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <select id="industry">
+                            <option value="">Select Industry</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="distribution">Distribution/Wholesale</option>
+                            <option value="retail">Retail</option>
+                            <option value="technology">Technology/Software</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="professional">Professional Services</option>
+                            <option value="construction">Construction</option>
+                            <option value="hospitality">Hospitality</option>
+                            <option value="food">Food & Beverage</option>
+                            <option value="financial">Financial Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="revenue">Annual Revenue (USD)</label>
+                        <input type="number" id="revenue" placeholder="e.g., 50000000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employees">Number of Employees</label>
+                        <input type="number" id="employees" placeholder="e.g., 150">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearsInBusiness">Years in Business</label>
+                        <input type="number" id="yearsInBusiness" placeholder="e.g., 12">
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Operations Profile</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="locations">Number of Physical Locations</label>
+                        <input type="number" id="locations" placeholder="e.g., 3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="facilities">Facility Ownership</label>
+                        <select id="facilities">
+                            <option value="lease">Lease all facilities</option>
+                            <option value="own">Own all facilities</option>
+                            <option value="both">Mix of own/lease</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="international">International Operations</label>
+                        <select id="international">
+                            <option value="none">None - US only</option>
+                            <option value="canada">Canada</option>
+                            <option value="mexico">Mexico</option>
+                            <option value="europe">Europe</option>
+                            <option value="asia">Asia</option>
+                            <option value="multiple">Multiple regions</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exportRevenue">Export Revenue % (if international)</label>
+                        <input type="number" id="exportRevenue" placeholder="e.g., 25" min="0" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="storesData">Store Customer Data Electronically?</label>
+                        <select id="storesData">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerRecords">Number of Customer Records</label>
+                        <input type="number" id="customerRecords" placeholder="e.g., 50000">
+                        <small>Only if storing data electronically</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyType">Company Type</label>
+                        <select id="companyType">
+                            <option value="private">Private/Closely Held</option>
+                            <option value="public">Publicly Traded</option>
+                            <option value="pe">Private Equity Owned</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="boardStructure">Board Structure</label>
+                        <select id="boardStructure">
+                            <option value="owner">Owner-managed (no board)</option>
+                            <option value="advisory">Advisory board only</option>
+                            <option value="independent">Independent board of directors</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="boardMembers">Number of Outside Board Members</label>
+                        <input type="number" id="boardMembers" placeholder="e.g., 5">
+                        <small>Non-management directors</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicles">Vehicles in Fleet</label>
+                        <input type="number" id="vehicles" placeholder="e.g., 12">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="revenueType">Revenue Type</label>
+                        <select id="revenueType">
+                            <option value="b2b">Primarily B2B</option>
+                            <option value="b2c">Primarily B2C</option>
+                            <option value="both">Mix of B2B and B2C</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Current Insurance Coverage</div>
+                <p style="margin-bottom: 1rem; color: #666;">Check all policies you currently have:</p>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong>Primary Coverages:</strong>
+                    <div class="checkbox-grid" style="margin-top: 0.5rem;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_gl" value="gl">
+                            <label for="policy_gl">General Liability (GL)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_property" value="property">
+                            <label for="policy_property">Commercial Property</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_bi" value="bi">
+                            <label for="policy_bi">Business Interruption</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_wc" value="wc">
+                            <label for="policy_wc">Workers Compensation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_auto" value="auto">
+                            <label for="policy_auto">Commercial Auto</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_umbrella" value="umbrella">
+                            <label for="policy_umbrella">Umbrella/Excess Liability</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong>Management & Professional:</strong>
+                    <div class="checkbox-grid" style="margin-top: 0.5rem;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_do" value="do">
+                            <label for="policy_do">Directors & Officers (D&O)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_eo" value="eo">
+                            <label for="policy_eo">Errors & Omissions (E&O)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_fiduciary" value="fiduciary">
+                            <label for="policy_fiduciary">Fiduciary Liability</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_epli" value="epli">
+                            <label for="policy_epli">Employment Practices (EPLI)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_crime" value="crime">
+                            <label for="policy_crime">Crime/Fidelity Bond</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_kr" value="kr">
+                            <label for="policy_kr">Kidnap & Ransom</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong>Cyber & Technology:</strong>
+                    <div class="checkbox-grid" style="margin-top: 0.5rem;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_cyber" value="cyber">
+                            <label for="policy_cyber">Cyber Liability</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_databreach" value="databreach">
+                            <label for="policy_databreach">Data Breach Response</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_network" value="network">
+                            <label for="policy_network">Network Security Liability</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_techeo" value="techeo">
+                            <label for="policy_techeo">Technology E&O</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong>Specialty Coverages:</strong>
+                    <div class="checkbox-grid" style="margin-top: 0.5rem;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_product" value="product">
+                            <label for="policy_product">Product Liability</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_pollution" value="pollution">
+                            <label for="policy_pollution">Pollution/Environmental</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_tradecredit" value="tradecredit">
+                            <label for="policy_tradecredit">Trade Credit Insurance</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_fx" value="fx">
+                            <label for="policy_fx">Foreign Exchange (FX) Insurance</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_political" value="political">
+                            <label for="policy_political">Political Risk</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_marine" value="marine">
+                            <label for="policy_marine">Marine Cargo</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_recall" value="recall">
+                            <label for="policy_recall">Product Recall</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="policy_supply" value="supply">
+                            <label for="policy_supply">Supply Chain Interruption</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <strong>Loss Prevention & Credits:</strong>
+                    <div class="checkbox-grid" style="margin-top: 0.5rem;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lp_safety" value="safety">
+                            <label for="lp_safety">Safety program documentation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lp_losscontrol" value="losscontrol">
+                            <label for="lp_losscontrol">Loss control services from carrier</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lp_claims" value="claims">
+                            <label for="lp_claims">Claims management program</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lp_engineering" value="engineering">
+                            <label for="lp_engineering">Risk engineering reports</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lp_training" value="training">
+                            <label for="lp_training">Safety training certifications</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lp_certs" value="certs">
+                            <label for="lp_certs">Industry certifications (ISO, etc.)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="analyzeInsurance()">Analyze Insurance Risk</button>
+        </section>
+
+        <!-- Results Section -->
+        <div id="results" class="results">
+            <!-- Results will be populated here -->
+        </div>
+
+        <!-- Lead Capture -->
+        <div id="leadCapture" class="lead-capture" style="display: none;">
+            <h3>📊 Get Your Detailed Insurance Risk Report</h3>
+            <p>Your assessment shows significant opportunities for cost savings and risk reduction.</p>
+            <p>Get a comprehensive analysis with specific broker RFP guidance and coverage recommendations.</p>
+            
+            <a href="https://airtable.com/appn7guymXXzmpvly/pagKYzcm4hRbPJhGh/form" 
+               target="_blank" 
+               class="airtable-btn">
+                📧 Get My Detailed Insurance Analysis
+            </a>
+            
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                Opens in new tab • Takes 2 minutes • Receive report within 2 business days
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function analyzeInsurance() {
+            // Get broker performance data
+            const yearsWithBroker = parseInt(document.getElementById('yearsWithBroker').value) || 0;
+            const totalPremiumCurrent = parseFloat(document.getElementById('totalPremiumCurrent').value) || 0;
+            const totalPremium5Years = parseFloat(document.getElementById('totalPremium5Years').value) || 0;
+            const numberOfPolicies = parseInt(document.getElementById('numberOfPolicies').value) || 0;
+            const claimsLast5Years = document.getElementById('claimsLast5Years').value;
+            const lastRFP = document.getElementById('lastRFP').value;
+
+            // Get company data
+            const industry = document.getElementById('industry').value;
+            const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+            const employees = parseInt(document.getElementById('employees').value) || 0;
+            const storesData = document.getElementById('storesData').value;
+            const customerRecords = parseInt(document.getElementById('customerRecords').value) || 0;
+            const companyType = document.getElementById('companyType').value;
+            const boardStructure = document.getElementById('boardStructure').value;
+            const boardMembers = parseInt(document.getElementById('boardMembers').value) || 0;
+            const international = document.getElementById('international').value;
+            const exportRevenue = parseInt(document.getElementById('exportRevenue').value) || 0;
+            const revenueType = document.getElementById('revenueType').value;
+
+            // Validate required fields
+            if (!revenue || !industry || !employees) {
+                alert('Please fill in at least Industry, Revenue, and Number of Employees');
+                return;
+            }
+
+            // Collect checked policies
+            const policies = [];
+            document.querySelectorAll('input[type="checkbox"][id^="policy_"]:checked').forEach(cb => {
+                policies.push(cb.value);
+            });
+
+            // Collect loss prevention items
+            const lossPrevention = [];
+            document.querySelectorAll('input[type="checkbox"][id^="lp_"]:checked').forEach(cb => {
+                lossPrevention.push(cb.value);
+            });
+
+            // BROKER PERFORMANCE ANALYSIS
+            const brokerFindings = analyzeBrokerPerformance(
+                yearsWithBroker, 
+                totalPremiumCurrent, 
+                totalPremium5Years,
+                numberOfPolicies,
+                claimsLast5Years,
+                lastRFP,
+                revenue
+            );
+
+            // COVERAGE GAP ANALYSIS
+            const coverageFindings = analyzeCoverageGaps(
+                industry,
+                revenue,
+                employees,
+                policies,
+                storesData,
+                customerRecords,
+                companyType,
+                boardStructure,
+                boardMembers,
+                international,
+                exportRevenue,
+                revenueType
+            );
+
+            // LOSS PREVENTION ANALYSIS
+            const lpFindings = analyzeLossPrevention(lossPrevention, totalPremiumCurrent);
+
+            // DISPLAY RESULTS
+            displayResults(brokerFindings, coverageFindings, lpFindings);
+        }
+
+        function analyzeBrokerPerformance(years, currentPremium, premium5Years, numPolicies, claims, lastRFP, revenue) {
+            const findings = [];
+            let brokerGrade = 'A';
+            let totalSavings = 0;
+
+            // Years with broker analysis
+            if (years >= 10) {
+                findings.push({
+                    priority: 'critical',
+                    title: 'Broker Complacency Risk - High Priority RFP Needed',
+                    description: `You've been with the same broker for ${years} years. Industry best practice is to RFP every 3-5 years. Long-term relationships often lead to premium drift and reduced service quality.`,
+                    impact: 'Estimated savings from competitive RFP: $' + (currentPremium * 0.15).toLocaleString()
+                });
+                brokerGrade = 'D';
+                totalSavings += currentPremium * 0.15;
+            } else if (years >= 5) {
+                findings.push({
+                    priority: 'high',
+                    title: 'Consider RFP Process',
+                    description: `${years} years with same broker. Consider competitive RFP to ensure market competitiveness.`,
+                    impact: 'Potential savings: $' + (currentPremium * 0.10).toLocaleString()
+                });
+                brokerGrade = brokerGrade === 'A' ? 'B' : brokerGrade;
+                totalSavings += currentPremium * 0.10;
+            }
+
+            // Premium increase analysis
+            if (premium5Years > 0 && currentPremium > 0) {
+                const increase = ((currentPremium - premium5Years) / premium5Years) * 100;
+                const annualIncrease = increase / 5;
+                
+                // Industry benchmark (accounting for inflation + risk)
+                let benchmark = 3.5; // base
+                if (claims === 'multiple') benchmark = 8;
+                else if (claims === 'two') benchmark = 6;
+                else if (claims === 'one') benchmark = 4.5;
+
+                if (annualIncrease > benchmark + 2) {
+                    findings.push({
+                        priority: 'critical',
+                        title: 'Excessive Premium Increases',
+                        description: `Your premiums increased ${annualIncrease.toFixed(1)}% annually vs. ${benchmark}% industry benchmark (considering your claims history). This suggests poor broker negotiation or market shopping.`,
+                        impact: 'Overpayment estimate: $' + ((currentPremium - premium5Years * Math.pow(1 + benchmark/100, 5)) * 0.5).toLocaleString()
+                    });
+                    brokerGrade = 'F';
+                    totalSavings += (currentPremium - premium5Years * Math.pow(1 + benchmark/100, 5)) * 0.5;
+                } else if (annualIncrease > benchmark) {
+                    findings.push({
+                        priority: 'medium',
+                        title: 'Above-Market Premium Growth',
+                        description: `Premiums growing at ${annualIncrease.toFixed(1)}% annually vs. ${benchmark}% expected. Some inefficiency present.`,
+                        impact: 'Potential savings: $' + (currentPremium * 0.05).toLocaleString()
+                    });
+                    if (brokerGrade === 'A') brokerGrade = 'C';
+                    totalSavings += currentPremium * 0.05;
+                }
+            }
+
+            // Last RFP analysis
+            if (lastRFP === 'never') {
+                findings.push({
+                    priority: 'critical',
+                    title: 'Never Competitively Shopped Insurance',
+                    description: 'Without competitive pressure, brokers have no incentive to negotiate best terms. You are likely significantly overpaying.',
+                    impact: 'Estimated overpayment: $' + (currentPremium * 0.20).toLocaleString()
+                });
+                brokerGrade = 'F';
+                totalSavings += currentPremium * 0.20;
+            } else if (lastRFP === '5plus') {
+                findings.push({
+                    priority: 'high',
+                    title: 'Long Time Since Competitive RFP',
+                    description: '5+ years without competitive shopping. Market has likely evolved significantly.',
+                    impact: 'Potential savings: $' + (currentPremium * 0.12).toLocaleString()
+                });
+                if (brokerGrade === 'A' || brokerGrade === 'B') brokerGrade = 'C';
+                totalSavings += currentPremium * 0.12;
+            }
+
+            // Broker commission analysis
+            const estimatedCommission = currentPremium * 0.12; // 12% average
+            findings.push({
+                priority: 'medium',
+                title: 'Hidden Broker Compensation',
+                description: `Your broker likely earns approximately $${estimatedCommission.toLocaleString()} annually from your premiums (10-15% commission is standard). You should know this number and ensure it's justified by service level.`,
+                impact: 'Transparency opportunity - verify broker compensation disclosure'
+            });
+
+            return { findings, brokerGrade, totalSavings };
+        }
+
+        function analyzeCoverageGaps(industry, revenue, employees, policies, storesData, customerRecords, companyType, boardStructure, boardMembers, international, exportRevenue, revenueType) {
+            const findings = [];
+
+            // D&O Analysis
+            if (!policies.includes('do')) {
+                if (boardStructure === 'independent' || companyType === 'public') {
+                    findings.push({
+                        priority: 'critical',
+                        title: 'Missing Critical D&O Coverage',
+                        description: `As a ${companyType === 'public' ? 'public company' : 'company with an independent board'}, you face significant director/officer liability. Claims average $3.5M.`,
+                        impact: 'Recommended coverage: $' + (revenue * 0.10).toLocaleString() + ' (10% of revenue)'
+                    });
+                } else if (revenue > 10000000) {
+                    findings.push({
+                        priority: 'high',
+                        title: 'D&O Coverage Recommended',
+                        description: 'Companies over $10M revenue face employment claims, regulatory actions, and investor disputes that target personal assets of officers.',
+                        impact: 'Recommended coverage: $' + (revenue * 0.08).toLocaleString()
+                    });
+                }
+            }
+
+            // Cyber Analysis
+            if (!policies.includes('cyber') && !policies.includes('databreach')) {
+                if (storesData === 'yes' || industry === 'technology' || industry === 'healthcare' || industry === 'financial') {
+                    const baseCoverage = 2000000;
+                    const recordsCoverage = customerRecords * 1;
+                    const industryMultiplier = (industry === 'healthcare' || industry === 'financial') ? 2 : 1;
+                    const recommendedCoverage = (baseCoverage + recordsCoverage) * industryMultiplier;
+                    
+                    findings.push({
+                        priority: 'critical',
+                        title: 'Critical Cyber Insurance Gap',
+                        description: `Storing ${customerRecords > 0 ? customerRecords.toLocaleString() + ' customer records' : 'customer data'} without cyber insurance. Average ransomware demand: $4.2M. Average data breach cost: $9.4M.`,
+                        impact: 'Recommended coverage: $' + recommendedCoverage.toLocaleString()
+                    });
+                }
+            }
+
+            // EPLI Analysis
+            if (!policies.includes('epli') && employees >= 15) {
+                findings.push({
+                    priority: 'high',
+                    title: 'Employment Practices Liability Recommended',
+                    description: `With ${employees} employees, you're exposed to discrimination, wrongful termination, and harassment claims. Average EPLI claim: $160K.`,
+                    impact: 'Recommended coverage: $' + (employees * 20000).toLocaleString()
+                });
+            }
+
+            // Product Liability
+            if (!policies.includes('product') && (industry === 'manufacturing' || industry === 'distribution')) {
+                const multiplier = industry === 'manufacturing' ? 2 : 1;
+                findings.push({
+                    priority: 'high',
+                    title: 'Product Liability Gap',
+                    description: 'Manufacturing/distribution companies face significant product liability exposure.',
+                    impact: 'Recommended coverage: $' + (revenue * multiplier).toLocaleString()
+                });
+            }
+
+            // International coverages
+            if (international !== 'none' && exportRevenue > 10) {
+                if (!policies.includes('political')) {
+                    findings.push({
+                        priority: 'medium',
+                        title: 'Political Risk Coverage Recommended',
+                        description: `${exportRevenue}% of revenue from exports. Consider political risk insurance for expropriation, currency inconvertibility, political violence.`,
+                        impact: 'Protects international receivables and assets'
+                    });
+                }
+
+                if (!policies.includes('fx') && exportRevenue > 20) {
+                    findings.push({
+                        priority: 'medium',
+                        title: 'FX Insurance Opportunity',
+                        description: `${exportRevenue}% export revenue creates FX exposure. FX insurance can protect margins.`,
+                        impact: 'Alternative: see our FX Risk Calculator for hedging strategies'
+                    });
+                }
+            }
+
+            // Supply chain for international
+            if ((international === 'asia' || international === 'multiple') && !policies.includes('supply')) {
+                findings.push({
+                    priority: 'high',
+                    title: 'Supply Chain Interruption Gap',
+                    description: 'Asia operations expose you to supply chain disruptions (COVID, geopolitics, natural disasters).',
+                    impact: 'Average supply chain disruption cost: $184M for mid-market companies'
+                });
+            }
+
+            // Cyber for B2C
+            if (revenueType === 'b2c' && !policies.includes('cyber')) {
+                findings.push({
+                    priority: 'critical',
+                    title: 'Consumer Data Risk',
+                    description: 'B2C companies face higher cyber liability due to consumer data. GDPR, CCPA, and state privacy laws create significant exposure.',
+                    impact: 'Average consumer data breach: $4.3M'
+                });
+            }
+
+            return findings;
+        }
+
+        function analyzeLossPrevention(lpItems, totalPremium) {
+            const findings = [];
+            const maxItems = 6;
+            const implementedItems = lpItems.length;
+            const savingsPerItem = totalPremium * 0.025; // 2.5% per item
+
+            if (implementedItems < maxItems) {
+                const missingItems = maxItems - implementedItems;
+                const potentialSavings = missingItems * savingsPerItem;
+                
+                findings.push({
+                    priority: implementedItems <= 2 ? 'high' : 'medium',
+                    title: 'Loss Prevention Premium Credits Available',
+                    description: `You have ${implementedItems} of ${maxItems} standard loss prevention programs. Each additional program typically reduces premiums by 2-5%.`,
+                    impact: 'Potential annual savings: $' + potentialSavings.toLocaleString()
+                });
+            }
+
+            if (implementedItems >= 5) {
+                findings.push({
+                    priority: 'low',
+                    title: 'Strong Loss Prevention Program',
+                    description: 'Excellent - you have robust loss prevention measures in place.',
+                    impact: 'Estimated premium savings: $' + (implementedItems * savingsPerItem).toLocaleString() + ' annually'
+                });
+            }
+
+            return { findings, potentialSavings: (maxItems - implementedItems) * savingsPerItem };
+        }
+
+        function displayResults(brokerFindings, coverageFindings, lpFindings) {
+            const resultsDiv = document.getElementById('results');
+            const leadCapture = document.getElementById('leadCapture');
+
+            let html = `
+                <div class="score-card">
+                    <h2>Your Insurance Risk Assessment</h2>
+                    <div class="grade grade-${brokerFindings.brokerGrade}">${brokerFindings.brokerGrade}</div>
+                    <div style="font-size: 1.2rem; margin-top: 1rem;">Broker Performance Grade</div>
+                    <div style="font-size: 2.5rem; font-weight: bold; margin-top: 1rem;">$${Math.round(brokerFindings.totalSavings + lpFindings.potentialSavings).toLocaleString()}</div>
+                    <div>Estimated Annual Savings Opportunity</div>
+                </div>
+
+                <div class="findings">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">Part 1: Broker Performance Issues</h3>
+            `;
+
+            brokerFindings.findings.forEach(finding => {
+                html += `
+                    <div class="finding-item finding-${finding.priority}">
+                        <div class="finding-title">${finding.title}</div>
+                        <div>${finding.description}</div>
+                        <div class="finding-impact">${finding.impact}</div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    <h3 style="margin: 2rem 0 1.5rem 0; font-size: 1.8rem;">Part 2: Coverage Gaps & Recommendations</h3>
+            `;
+
+            if (coverageFindings.length === 0) {
+                html += `
+                    <div class="finding-item finding-low">
+                        <div class="finding-title">Strong Coverage Portfolio</div>
+                        <div>Your current coverage selections align well with your operational profile. No critical gaps identified.</div>
+                    </div>
+                `;
+            } else {
+                coverageFindings.forEach(finding => {
+                    html += `
+                        <div class="finding-item finding-${finding.priority}">
+                            <div class="finding-title">${finding.title}</div>
+                            <div>${finding.description}</div>
+                            <div class="finding-impact">${finding.impact}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (lpFindings.findings.length > 0) {
+                html += `
+                    <h3 style="margin: 2rem 0 1.5rem 0; font-size: 1.8rem;">Part 3: Loss Prevention Opportunities</h3>
+                `;
+
+                lpFindings.findings.forEach(finding => {
+                    html += `
+                        <div class="finding-item finding-${finding.priority}">
+                            <div class="finding-title">${finding.title}</div>
+                            <div>${finding.description}</div>
+                            <div class="finding-impact">${finding.impact}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            html += `</div>`;
+
+            resultsDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+            leadCapture.style.display = 'block';
+
+            // Scroll to results
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
