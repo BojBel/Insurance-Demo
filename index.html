@@ -308,7 +308,7 @@
     <header class="header">
         <nav class="nav">
             <div class="logo">
-                <img src="assets/images/logo.png" alt="Denar Financial">
+                <img src="assets/images/Logo.png" alt="Denar Financial">
                 Denar Financial
             </div>
             <ul class="nav-links" id="navLinks">
@@ -552,7 +552,7 @@
             });
         });
 
-        // Initialize charts with sample insurance data
+        // Initialize charts with sample insurance data and animations
         const ctx1 = document.getElementById('brokerChart').getContext('2d');
         new Chart(ctx1, {
             type: 'line',
@@ -577,6 +577,10 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuart'
+                },
                 plugins: {
                     legend: {
                         display: true,
@@ -600,6 +604,11 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 2000,
+                    delay: 200,
+                    easing: 'easeInOutQuart'
+                },
                 plugins: {
                     legend: {
                         display: false
@@ -621,6 +630,13 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 2000,
+                    delay: 400,
+                    easing: 'easeInOutQuart',
+                    animateRotate: true,
+                    animateScale: true
+                },
                 plugins: {
                     legend: {
                         position: 'bottom'
@@ -646,6 +662,11 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 2000,
+                    delay: 600,
+                    easing: 'easeInOutQuart'
+                },
                 plugins: {
                     legend: {
                         display: false
