@@ -122,6 +122,47 @@
             margin: 3rem 0;
         }
 
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 3rem 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 0 1rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cccccc;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: #008080;
+        }
+
+        .dot:hover {
+            background: #006666;
+        }
+
         .card {
             background: white;
             border-radius: 12px;
@@ -289,10 +330,6 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
 
             .logo {
                 font-size: 1.2rem;
@@ -369,98 +406,122 @@
                 Manufacturing client renewal - November 2024
             </p>
         </div>
-        <div class="dashboard-grid">
-            <div class="card">
-                <h3>Broker Performance</h3>
-                <div class="metric">
-                    <span>Current Broker Grade</span>
-                    <span class="metric-value risk-high">D</span>
+        
+        <!-- Carousel Container -->
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Chart 1 -->
+                <div class="carousel-slide">
+                    <div class="card">
+                        <h3>Broker Performance</h3>
+                        <div class="metric">
+                            <span>Current Broker Grade</span>
+                            <span class="metric-value risk-high">D</span>
+                        </div>
+                        <div class="metric">
+                            <span>Years with Broker</span>
+                            <span class="metric-value">4 years</span>
+                        </div>
+                        <div class="metric">
+                            <span>Annual Premium Growth</span>
+                            <span class="metric-value risk-high">7.2%</span>
+                        </div>
+                        <div class="metric">
+                            <span>vs. Industry Benchmark</span>
+                            <span class="metric-value risk-high">+3.7%</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="brokerChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="metric">
-                    <span>Years with Broker</span>
-                    <span class="metric-value">4 years</span>
-                </div>
-                <div class="metric">
-                    <span>Annual Premium Growth</span>
-                    <span class="metric-value risk-high">7.2%</span>
-                </div>
-                <div class="metric">
-                    <span>vs. Industry Benchmark</span>
-                    <span class="metric-value risk-high">+3.7%</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="brokerChart"></canvas>
-                </div>
-            </div>
 
-            <div class="card">
-                <h3>Coverage Gap Analysis</h3>
-                <div class="metric">
-                    <span>Critical Gaps</span>
-                    <span class="metric-value risk-high">2</span>
+                <!-- Chart 2 -->
+                <div class="carousel-slide">
+                    <div class="card">
+                        <h3>Coverage Gap Analysis</h3>
+                        <div class="metric">
+                            <span>Critical Gaps</span>
+                            <span class="metric-value risk-high">2</span>
+                        </div>
+                        <div class="metric">
+                            <span>High Priority</span>
+                            <span class="metric-value risk-medium">3</span>
+                        </div>
+                        <div class="metric">
+                            <span>Total Uninsured Exposure</span>
+                            <span class="metric-value risk-high">$8.5M</span>
+                        </div>
+                        <div class="metric">
+                            <span>Risk Score</span>
+                            <span class="metric-value risk-high">78/100</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="coverageChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="metric">
-                    <span>High Priority</span>
-                    <span class="metric-value risk-medium">3</span>
-                </div>
-                <div class="metric">
-                    <span>Total Uninsured Exposure</span>
-                    <span class="metric-value risk-high">$8.5M</span>
-                </div>
-                <div class="metric">
-                    <span>Risk Score</span>
-                    <span class="metric-value risk-high">78/100</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="coverageChart"></canvas>
-                </div>
-            </div>
 
-            <div class="card">
-                <h3>Savings Opportunities</h3>
-                <div class="metric">
-                    <span>Broker RFP Savings</span>
-                    <span class="metric-value risk-low">$65,000</span>
+                <!-- Chart 3 -->
+                <div class="carousel-slide">
+                    <div class="card">
+                        <h3>Savings Opportunities</h3>
+                        <div class="metric">
+                            <span>Broker RFP Savings</span>
+                            <span class="metric-value risk-low">$65,000</span>
+                        </div>
+                        <div class="metric">
+                            <span>Loss Prevention Credits</span>
+                            <span class="metric-value risk-low">$28,000</span>
+                        </div>
+                        <div class="metric">
+                            <span>Coverage Optimization</span>
+                            <span class="metric-value risk-low">$15,000</span>
+                        </div>
+                        <div class="metric">
+                            <span>Total Annual Savings</span>
+                            <span class="metric-value risk-low">$108,000</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="savingsChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="metric">
-                    <span>Loss Prevention Credits</span>
-                    <span class="metric-value risk-low">$28,000</span>
-                </div>
-                <div class="metric">
-                    <span>Coverage Optimization</span>
-                    <span class="metric-value risk-low">$15,000</span>
-                </div>
-                <div class="metric">
-                    <span>Total Annual Savings</span>
-                    <span class="metric-value risk-low">$108,000</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="savingsChart"></canvas>
-                </div>
-            </div>
 
-            <div class="card">
-                <h3>Policy Portfolio</h3>
-                <div class="metric">
-                    <span>Total Annual Premium</span>
-                    <span class="metric-value">$425,000</span>
-                </div>
-                <div class="metric">
-                    <span>Active Policies</span>
-                    <span class="metric-value">8</span>
-                </div>
-                <div class="metric">
-                    <span>Recommended Policies</span>
-                    <span class="metric-value">12</span>
-                </div>
-                <div class="metric">
-                    <span>Missing Critical Coverage</span>
-                    <span class="metric-value risk-high">4</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="portfolioChart"></canvas>
+                <!-- Chart 4 -->
+                <div class="carousel-slide">
+                    <div class="card">
+                        <h3>Policy Portfolio</h3>
+                        <div class="metric">
+                            <span>Total Annual Premium</span>
+                            <span class="metric-value">$425,000</span>
+                        </div>
+                        <div class="metric">
+                            <span>Active Policies</span>
+                            <span class="metric-value">8</span>
+                        </div>
+                        <div class="metric">
+                            <span>Recommended Policies</span>
+                            <span class="metric-value">12</span>
+                        </div>
+                        <div class="metric">
+                            <span>Missing Critical Coverage</span>
+                            <span class="metric-value risk-high">4</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="portfolioChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Navigation Dots -->
+        <div class="carousel-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
         </div>
     </section>
 
@@ -536,6 +597,39 @@
     </footer>
 
     <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let autoRotate;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            
+            // Reset auto-rotation
+            clearInterval(autoRotate);
+            startAutoRotate();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        function startAutoRotate() {
+            autoRotate = setInterval(nextSlide, 2200); // Change every 2.2 seconds
+        }
+
+        // Start auto-rotation on page load
+        startAutoRotate();
+
         // Mobile menu toggle function
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
@@ -578,8 +672,8 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: {
-                    duration: 2000,
-                    easing: 'easeInOutQuart'
+                    duration: 3500,
+                    easing: 'easeOutBounce'
                 },
                 plugins: {
                     legend: {
@@ -605,9 +699,9 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: {
-                    duration: 2000,
-                    delay: 200,
-                    easing: 'easeInOutQuart'
+                    duration: 3500,
+                    delay: 500,
+                    easing: 'easeOutBounce'
                 },
                 plugins: {
                     legend: {
@@ -631,9 +725,9 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: {
-                    duration: 2000,
-                    delay: 400,
-                    easing: 'easeInOutQuart',
+                    duration: 3500,
+                    delay: 1000,
+                    easing: 'easeOutBounce',
                     animateRotate: true,
                     animateScale: true
                 },
@@ -663,9 +757,9 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: {
-                    duration: 2000,
-                    delay: 600,
-                    easing: 'easeInOutQuart'
+                    duration: 3500,
+                    delay: 1500,
+                    easing: 'easeOutBounce'
                 },
                 plugins: {
                     legend: {
