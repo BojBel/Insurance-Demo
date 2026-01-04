@@ -1,773 +1,585 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Denar Financial - Insurance Risk Management Solutions</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denar Financial - Insurance Risk Management Solutions</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .header {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #111827;
+      background: #f8f9fa;
+    }
 
-        .nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 1rem;
-            position: relative;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+    .header {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      color: #fff;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+      position: relative;
+      gap: 1rem;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
 
-        .nav-links a:hover {
-            color: #00AAAA;
-        }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
 
-        .hero {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
+    .nav-links a:hover { color: #00AAAA; }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
+    .mobile-menu {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      line-height: 1;
+    }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
+    .hero {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      color: #fff;
+      padding: 4rem 0;
+      text-align: center;
+    }
 
-        .cta-button {
-            background: #008080;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-        .cta-button:hover {
-            background: #006666;
-        }
+    .hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.35rem;
+      font-weight: 800;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
+    .hero h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.92;
+    }
 
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            margin: 3rem 0;
-        }
+    .cta-button {
+      background: #008080;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.25s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
 
-        .carousel-track {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-        }
+    .cta-button:hover { background: #006666; }
 
-        .carousel-slide {
-            min-width: 100%;
-            padding: 0 1rem;
-        }
+    .section {
+      padding: 3rem 0;
+    }
 
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
+    .section-white {
+      background: #fff;
+    }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #cccccc;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+    .section-muted {
+      background: #f8f9fa;
+    }
 
-        .dot.active {
-            background: #008080;
-        }
+    .section-title {
+      text-align: center;
+      color: #000000;
+      font-size: 1.85rem;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
 
-        .dot:hover {
-            background: #006666;
-        }
+    .section-subtitle {
+      text-align: center;
+      color: #374151;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+    }
 
-        .card h3 {
-            color: #000000;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
+    .card h3 {
+      color: #000000;
+      margin-bottom: 1rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
 
-        .metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid #e5e7eb;
+      gap: 1rem;
+    }
 
-        .metric:last-child {
-            border-bottom: none;
-        }
+    .metric:last-child { border-bottom: none; }
 
-        .metric-value {
-            font-weight: 600;
-            color: #000000;
-        }
+    .metric-value {
+      font-weight: 800;
+      color: #000000;
+      white-space: nowrap;
+    }
 
-        .risk-high { color: #dc2626; }
-        .risk-medium { color: #f59e0b; }
-        .risk-low { color: #059669; }
+    .risk-high { color: #dc2626; }
+    .risk-medium { color: #f59e0b; }
+    .risk-low { color: #059669; }
 
-        .chart-container {
-            height: 300px;
-            margin-top: 1rem;
-        }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
 
-        .services {
-            background: white;
-            padding: 4rem 0;
-            margin: 3rem 0;
-        }
+    .chart-container {
+      height: 300px;
+      margin-top: 1rem;
+    }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
 
-        .service-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid #008080;
-        }
+    .service-card {
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 14px;
+      border-left: 4px solid #008080;
+    }
 
-        .service-card h4 {
-            color: #000000;
-            margin-bottom: 1rem;
-        }
+    .service-card h4 {
+      color: #000000;
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
 
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #059669;
-            margin-top: 1rem;
-        }
+    .service-card p { color: #374151; }
 
-        .footer {
-            background: #1f2937;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
+    .service-card ul {
+      margin: 1rem 0 0 1.15rem;
+      color: #374151;
+    }
 
-        .mobile-menu {
-            display: none;
-        }
+    .price {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #059669;
+      margin-top: 1rem;
+    }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #000000;
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            }
+    .contact-box {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-            .nav-links.active {
-                display: flex;
-            }
+    .footer {
+      background: #111827;
+      color: #fff;
+      padding: 2rem 0;
+      text-align: center;
+    }
 
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
+    .footer p { opacity: 0.92; }
 
-            .nav-links a {
-                display: block;
-                padding: 0.75rem;
-                border-bottom: 1px solid #333;
-            }
-            
-            .mobile-menu {
-                display: block;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.5rem;
-                cursor: pointer;
-                padding: 0.5rem;
-            }
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #000000;
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            }
+    @media (max-width: 768px) {
+      .mobile-menu { display: block; }
 
-            .nav-links.active {
-                display: flex;
-            }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #000000;
+        flex-direction: column;
+        padding: 0.75rem 1rem;
+        gap: 0.25rem;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+        z-index: 20;
+      }
 
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
+      .nav-links.active { display: flex; }
 
-            .nav-links a {
-                display: block;
-                padding: 0.75rem;
-                border-bottom: 1px solid #333;
-            }
-            
-            .mobile-menu {
-                display: block;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.5rem;
-                cursor: pointer;
-                padding: 0.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
+      .nav-links li { width: 100%; }
 
-            .logo {
-                font-size: 1.2rem;
-            }
+      .nav-links a {
+        display: block;
+        padding: 0.85rem;
+        border-bottom: 1px solid #222;
+      }
 
-            .logo img {
-                height: 32px;
-            }
-        }
-    </style>
+      .hero h1 { font-size: 2rem; }
+      .hero h2 { font-size: 1.85rem; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+
+      .logo { font-size: 1.1rem; }
+      .logo img { height: 32px; }
+    }
+  </style>
 </head>
+
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                <img src="assets/images/Logo.png" alt="Denar Financial">
-                Denar Financial
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">
+        <img src="/assets/images/logo.png" alt="Denar Financial"
+             onerror="this.style.display='none'">
+        Denar Financial
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="https://denarfinancial.com">Main Site</a></li>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <button class="mobile-menu" type="button" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>AI Powered Treasury</h1>
+      <h2>Insurance Risk Management</h2>
+      <p>Independent AI-Powered Broker Analysis • Success-Based Pricing • No Savings = No Fee</p>
+      <a href="#contact" class="cta-button">Get Your Free AI Risk Scan</a>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div style="max-width: 950px; margin: 0 auto; text-align: center;">
+        <h2 class="section-title" style="font-size: 1.5rem;">AI-Powered Insurance Intelligence from Treasury Professionals</h2>
+        <p style="color:#374151; font-size: 1.05rem; line-height: 1.75; margin-top: 1rem;">
+          We’re treasury and risk management professionals who understand how insurance fits into your overall financial strategy.
+          Companies often overpay for years without competitive shopping, miss coverage gaps, and leave premium savings on the table through unused loss prevention credits.
+        </p>
+        <p style="color:#374151; font-size: 1.05rem; line-height: 1.75; margin-top: 1rem;">
+          Our AI-powered platform provides independent analysis by benchmarking broker performance, identifying coverage gaps, and quantifying savings opportunities without sales pressure.
+          Success-based pricing means we only get paid when you save money.
+        </p>
+
+        <div style="background:#fff; padding:2rem; border-radius:14px; margin-top:2rem; border-left:4px solid #008080; text-align:left;">
+          <h3 style="color:#000; margin-bottom:1rem; font-size:1.2rem; font-weight:800;">Why AI-Powered vs. Traditional Brokers?</h3>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1.25rem;">
+            <div>
+              <div style="font-weight:800; color:#008080; margin-bottom:0.35rem;">Predictive + Automated</div>
+              <div style="font-size:0.95rem; color:#374151;">Early risk alerts, premium anomaly detection, and coverage adequacy monitoring.</div>
             </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="https://denarfinancial.com">Main Site</a></li>
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="calculator.html">Calculator</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>AI Powered Treasury</h1>
-            <h2 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">Insurance Risk Management</h2>
-            <p>Independent AI-Powered Broker Analysis • Success-Based Pricing • No Savings = No Fee</p>
-            <a href="#contact" class="cta-button">Get Your Free AI Risk Scan</a>
-        </div>
-    </section>
-
-    <section style="background: #f8f9fa; padding: 3rem 0;">
-        <div class="container">
-            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-                <h2 style="color: #000000; font-size: 1.6rem; margin-bottom: 1rem;">AI-Powered Insurance Intelligence from Treasury Professionals</h2>
-                <p style="color: #374151; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                    We're treasury and risk management professionals who understand how insurance fits into your overall financial strategy. We've watched companies overpay brokers for years without competitive shopping, miss critical coverage gaps, and leave premium savings on the table through unused loss prevention credits.
-                </p>
-                <p style="color: #374151; font-size: 1.1rem; line-height: 1.7;">
-                    Our <strong>AI-powered platform</strong> provides the independent, unbiased analysis you need - automatically evaluating broker performance against 10,000+ comparable companies, identifying coverage gaps through machine learning, and quantifying savings opportunities without the sales pressure. <strong>Success-based pricing means we only get paid when you save money.</strong>
-                </p>
-                <div style="background: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid #008080;">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.3rem;">Why AI-Powered vs. Traditional Brokers?</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: left;">
-                        <div>
-                            <div style="font-weight: 600; color: #008080; margin-bottom: 0.5rem;">🤖 AI Does What Brokers Won't</div>
-                            <div style="font-size: 0.95rem; color: #374151;">Predictive risk alerts 6-12 months before claims, automated premium anomaly detection, real-time coverage adequacy monitoring</div>
-                        </div>
-                        <div>
-                            <div style="font-weight: 600; color: #008080; margin-bottom: 0.5rem;">💰 Success-Based Alignment</div>
-                            <div style="font-size: 0.95rem; color: #374151;">Brokers earn commissions on premiums. We earn fees on your savings. Our incentives are 100% aligned with reducing your costs.</div>
-                        </div>
-                        <div>
-                            <div style="font-weight: 600; color: #008080; margin-bottom: 0.5rem;">📊 Treasury-Level Analysis</div>
-                            <div style="font-size: 0.95rem; color: #374151;">Cross-risk correlation (FX + Insurance), TCOR modeling, capital efficiency optimization - strategic CFO-level insights</div>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <div style="font-weight:800; color:#008080; margin-bottom:0.35rem;">Aligned Incentives</div>
+              <div style="font-size:0.95rem; color:#374151;">Brokers earn commissions on premiums. We earn based on your savings.</div>
             </div>
-        </div>
-    </section>
-
-    <section id="dashboard" class="container">
-        <div style="background: rgba(0, 128, 128, 0.1); border: 2px solid #008080; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
-            <h2 style="text-align: center; color: #008080; font-size: 2rem; margin-bottom: 0.5rem; font-weight: 700;">Real Client Results</h2>
-            <p style="text-align: center; color: #008080; font-size: 1.1rem;">
-                Manufacturing client renewal - November 2024
-            </p>
-        </div>
-        
-        <!-- Carousel Container -->
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Chart 1 -->
-                <div class="carousel-slide">
-                    <div class="card">
-                        <h3>Broker Performance</h3>
-                        <div class="metric">
-                            <span>Current Broker Grade</span>
-                            <span class="metric-value risk-high">D</span>
-                        </div>
-                        <div class="metric">
-                            <span>Years with Broker</span>
-                            <span class="metric-value">4 years</span>
-                        </div>
-                        <div class="metric">
-                            <span>Annual Premium Growth</span>
-                            <span class="metric-value risk-high">7.2%</span>
-                        </div>
-                        <div class="metric">
-                            <span>vs. Industry Benchmark</span>
-                            <span class="metric-value risk-high">+3.7%</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="brokerChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chart 2 -->
-                <div class="carousel-slide">
-                    <div class="card">
-                        <h3>Coverage Gap Analysis</h3>
-                        <div class="metric">
-                            <span>Critical Gaps</span>
-                            <span class="metric-value risk-high">2</span>
-                        </div>
-                        <div class="metric">
-                            <span>High Priority</span>
-                            <span class="metric-value risk-medium">3</span>
-                        </div>
-                        <div class="metric">
-                            <span>Total Uninsured Exposure</span>
-                            <span class="metric-value risk-high">$8.5M</span>
-                        </div>
-                        <div class="metric">
-                            <span>Risk Score</span>
-                            <span class="metric-value risk-high">78/100</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="coverageChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chart 3 -->
-                <div class="carousel-slide">
-                    <div class="card">
-                        <h3>Savings Opportunities</h3>
-                        <div class="metric">
-                            <span>Broker RFP Savings</span>
-                            <span class="metric-value risk-low">$65,000</span>
-                        </div>
-                        <div class="metric">
-                            <span>Loss Prevention Credits</span>
-                            <span class="metric-value risk-low">$28,000</span>
-                        </div>
-                        <div class="metric">
-                            <span>Coverage Optimization</span>
-                            <span class="metric-value risk-low">$15,000</span>
-                        </div>
-                        <div class="metric">
-                            <span>Total Annual Savings</span>
-                            <span class="metric-value risk-low">$108,000</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="savingsChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chart 4 -->
-                <div class="carousel-slide">
-                    <div class="card">
-                        <h3>Policy Portfolio</h3>
-                        <div class="metric">
-                            <span>Total Annual Premium</span>
-                            <span class="metric-value">$425,000</span>
-                        </div>
-                        <div class="metric">
-                            <span>Active Policies</span>
-                            <span class="metric-value">8</span>
-                        </div>
-                        <div class="metric">
-                            <span>Recommended Policies</span>
-                            <span class="metric-value">12</span>
-                        </div>
-                        <div class="metric">
-                            <span>Missing Critical Coverage</span>
-                            <span class="metric-value risk-high">4</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="portfolioChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <div style="font-weight:800; color:#008080; margin-bottom:0.35rem;">Treasury-Level Analysis</div>
+              <div style="font-size:0.95rem; color:#374151;">TCOR modeling, capital efficiency, and strategic CFO-level insights.</div>
             </div>
+          </div>
         </div>
-        
-        <!-- Navigation Dots -->
-        <div class="carousel-dots">
-            <span class="dot active" onclick="goToSlide(0)"></span>
-            <span class="dot" onclick="goToSlide(1)"></span>
-            <span class="dot" onclick="goToSlide(2)"></span>
-            <span class="dot" onclick="goToSlide(3)"></span>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="section section-muted">
+    <div class="container">
+      <h2 class="section-title">Real Client Results</h2>
+      <p class="section-subtitle">Manufacturing client renewal - November 2024</p>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Broker Performance</h3>
+          <div class="metric"><span>Current Broker Grade</span><span class="metric-value risk-high">D</span></div>
+          <div class="metric"><span>Years with Broker</span><span class="metric-value">4 years</span></div>
+          <div class="metric"><span>Annual Premium Growth</span><span class="metric-value risk-high">7.2%</span></div>
+          <div class="metric"><span>vs. Industry Benchmark</span><span class="metric-value risk-high">+3.7%</span></div>
+          <div class="chart-container"><canvas id="brokerChart"></canvas></div>
         </div>
-    </section>
 
-    <section id="services" class="services">
-        <div class="container">
-            <h2 style="text-align: center; color: #000000; margin-bottom: 1rem;">AI-Powered Insurance Services</h2>
-            <p style="text-align: center; color: #374151; margin-bottom: 3rem; font-size: 1.1rem;">Success-based pricing • No savings = No fee • Treasury-level risk analysis</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h4>Free AI Risk Scan</h4>
-                    <p>Instant AI-powered analysis of your broker performance and coverage gaps. See your savings potential in minutes.</p>
-                    <ul style="margin: 1rem 0;">
-                        <li>✓ AI Broker Performance Scoring</li>
-                        <li>✓ Automated Coverage Gap Detection</li>
-                        <li>✓ Machine Learning Premium Benchmarking</li>
-                        <li>✓ Estimated Savings Opportunity</li>
-                        <li>✓ Industry-Specific Risk Analysis</li>
-                    </ul>
-                    <div class="price" style="color: #008080;">FREE</div>
-                </div>
-                
-                <div class="service-card">
-                    <h4>AI Insurance Audit + Broker RFP</h4>
-                    <p>Comprehensive AI-powered audit with full RFP management. We only get paid when you save money.</p>
-                    <ul style="margin: 1rem 0;">
-                        <li>✓ AI Premium Anomaly Detection</li>
-                        <li>✓ Predictive Premium Modeling</li>
-                        <li>✓ Automated Loss Prevention Credit Mining</li>
-                        <li>✓ Smart Broker Matching Algorithm</li>
-                        <li>✓ AI-Generated RFP Documents</li>
-                        <li>✓ Proposal Comparison Analytics</li>
-                    </ul>
-                    <div class="price" style="color: #008080;">100% Success Based</div>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #008080; font-weight: 600;">No savings = No fee</p>
-                </div>
-                
-                <div class="service-card" style="border-left-color: #008080;">
-                    <h4>AI Continuous Risk Advisor</h4>
-                    <p style="margin-bottom: 0.5rem;">Treasury-level AI risk intelligence and strategic advisory.</p>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong style="color: #008080;">What brokers DON'T provide</strong> (and we do):</p>
-                    <ul style="margin: 1rem 0;">
-                        <li>✓ Predictive Risk Alerts (6-12 months early warning)</li>
-                        <li>✓ Real-Time Coverage Adequacy Monitoring</li>
-                        <li>✓ Claims Impact Forecasting (before you file)</li>
-                        <li>✓ Dynamic Loss Prevention Optimization</li>
-                        <li>✓ Total Cost of Risk (TCOR) Modeling</li>
-                        <li>✓ Cross-Risk Correlation Analysis (FX + Insurance)</li>
-                        <li>✓ Board-Ready Executive Dashboards</li>
-                    </ul>
-                    <div class="price" style="color: #008080;">$250/month</div>
-                </div>
-            </div>
+        <div class="card">
+          <h3>Coverage Gap Analysis</h3>
+          <div class="metric"><span>Critical Gaps</span><span class="metric-value risk-high">2</span></div>
+          <div class="metric"><span>High Priority</span><span class="metric-value risk-medium">3</span></div>
+          <div class="metric"><span>Total Uninsured Exposure</span><span class="metric-value risk-high">$8.5M</span></div>
+          <div class="metric"><span>Risk Score</span><span class="metric-value risk-high">78/100</span></div>
+          <div class="chart-container"><canvas id="coverageChart"></canvas></div>
         </div>
-    </section>
 
-    <section id="contact" style="background: #f8f9fa; padding: 3rem 0;">
-        <div class="container" style="text-align: center;">
-            <h2 style="color: #000000; margin-bottom: 1rem;">Ready to Save on Insurance Costs?</h2>
-            <p style="margin-bottom: 0.5rem; font-size: 1.1rem;">Get your free AI-powered insurance risk scan in 5 minutes.</p>
-            <p style="margin-bottom: 2rem; font-size: 1rem; color: #059669; font-weight: 600;">No savings = No fee • Success-based pricing • Independent analysis</p>
-            <a href="calculator.html" class="cta-button">Start Free AI Risk Scan</a>
-            <div style="margin-top: 2rem;">
-                <p><strong>Contact:</strong> bojan@denarfinancial.com</p>
-            </div>
+        <div class="card">
+          <h3>Savings Opportunities</h3>
+          <div class="metric"><span>Broker RFP Savings</span><span class="metric-value risk-low">$65,000</span></div>
+          <div class="metric"><span>Loss Prevention Credits</span><span class="metric-value risk-low">$28,000</span></div>
+          <div class="metric"><span>Coverage Optimization</span><span class="metric-value risk-low">$15,000</span></div>
+          <div class="metric"><span>Total Annual Savings</span><span class="metric-value risk-low">$108,000</span></div>
+          <div class="chart-container"><canvas id="savingsChart"></canvas></div>
         </div>
-    </section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Denar Financial. AI Powered Treasury & Financial Planning Solutions.</p>
-            <p>Contact: bojan@denarfinancial.com</p>
+        <div class="card">
+          <h3>Policy Portfolio</h3>
+          <div class="metric"><span>Total Annual Premium</span><span class="metric-value">$425,000</span></div>
+          <div class="metric"><span>Active Policies</span><span class="metric-value">8</span></div>
+          <div class="metric"><span>Recommended Policies</span><span class="metric-value">12</span></div>
+          <div class="metric"><span>Missing Critical Coverage</span><span class="metric-value risk-high">4</span></div>
+          <div class="chart-container"><canvas id="portfolioChart"></canvas></div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Carousel functionality
-        let currentSlide = 0;
-        const totalSlides = 4;
-        let autoRotate;
+  <section id="services" class="section section-white">
+    <div class="container">
+      <h2 class="section-title">AI-Powered Insurance Services</h2>
+      <p class="section-subtitle">Success-based pricing • No savings = No fee • Treasury-level risk analysis</p>
 
-        function goToSlide(index) {
-            currentSlide = index;
-            const track = document.getElementById('carouselTrack');
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Update dots
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-            
-            // Reset auto-rotation
-            clearInterval(autoRotate);
-            startAutoRotate();
-        }
+      <div class="services-grid">
+        <div class="service-card">
+          <h4>Free AI Risk Scan</h4>
+          <p>Instant analysis of broker performance and coverage gaps. See savings potential in minutes.</p>
+          <ul>
+            <li>AI Broker Performance Scoring</li>
+            <li>Automated Coverage Gap Detection</li>
+            <li>Premium Benchmarking</li>
+            <li>Estimated Savings Opportunity</li>
+            <li>Industry-Specific Risk Analysis</li>
+          </ul>
+          <div class="price">FREE</div>
+        </div>
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-        }
+        <div class="service-card">
+          <h4>Insurance Audit + Broker RFP</h4>
+          <p>Comprehensive audit with RFP management. We only get paid when you save money.</p>
+          <ul>
+            <li>Premium Anomaly Detection</li>
+            <li>Predictive Premium Modeling</li>
+            <li>Loss Prevention Credit Mining</li>
+            <li>Broker Matching</li>
+            <li>RFP Documents</li>
+            <li>Proposal Comparison Analytics</li>
+          </ul>
+          <div class="price">Success Based</div>
+          <p style="margin-top:0.35rem; font-size:0.95rem; color:#059669; font-weight:800;">No savings = No fee</p>
+        </div>
 
-        function startAutoRotate() {
-            autoRotate = setInterval(nextSlide, 2200); // Change every 2.2 seconds
-        }
+        <div class="service-card">
+          <h4>Continuous Risk Advisor</h4>
+          <p>Treasury-level risk intelligence and strategic advisory.</p>
+          <ul>
+            <li>Predictive Risk Alerts</li>
+            <li>Coverage Adequacy Monitoring</li>
+            <li>Claims Impact Forecasting</li>
+            <li>Loss Prevention Optimization</li>
+            <li>Total Cost of Risk Modeling</li>
+            <li>Executive Dashboards</li>
+          </ul>
+          <div class="price">$250/month</div>
+          <p style="margin-top:0.35rem; font-size:0.95rem; color:#6b7280; font-weight:700;">Introductory rate</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Start auto-rotation on page load
-        startAutoRotate();
+  <section id="contact" class="section section-muted">
+    <div class="container">
+      <div class="contact-box">
+        <h2 class="section-title">Ready to Save on Insurance Costs?</h2>
+        <p style="margin-bottom:0.4rem; font-size:1.05rem; color:#111827; font-weight:650;">Get your free insurance risk scan in 5 minutes.</p>
+        <p style="margin-bottom:1.75rem; font-size:1rem; color:#059669; font-weight:800;">No savings = No fee • Success-based pricing • Independent analysis</p>
+        <a href="calculator.html" class="cta-button">Start Free AI Risk Scan</a>
+        <div style="margin-top: 1.75rem;">
+          <p style="color:#111827;"><strong>Contact:</strong> consulting@denarfinancial.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Mobile menu toggle function
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Denar Financial. AI Powered Treasury & Financial Planning Solutions.</p>
+      <p>Contact: consulting@denarfinancial.com</p>
+    </div>
+  </footer>
 
-        // Close mobile menu when clicking on a link
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    document.getElementById('navLinks').classList.remove('active');
-                });
-            });
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.nav-links a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          document.getElementById('navLinks').classList.remove('active');
         });
+      });
 
-        // Initialize charts with sample insurance data and animations
-        const ctx1 = document.getElementById('brokerChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
-                datasets: [{
-                    label: 'Annual Premium ($000s)',
-                    data: [285, 310, 335, 365, 395, 425],
-                    borderColor: '#dc2626',
-                    backgroundColor: 'rgba(220, 38, 38, 0.1)',
-                    tension: 0.3
-                },
-                {
-                    label: 'Industry Benchmark ($000s)',
-                    data: [285, 300, 315, 330, 345, 362],
-                    borderColor: '#059669',
-                    backgroundColor: 'rgba(5, 150, 105, 0.1)',
-                    tension: 0.3,
-                    borderDash: [5, 5]
-                }]
+      const elBroker = document.getElementById('brokerChart');
+      const elCoverage = document.getElementById('coverageChart');
+      const elSavings = document.getElementById('savingsChart');
+      const elPortfolio = document.getElementById('portfolioChart');
+      if (!elBroker || !elCoverage || !elSavings || !elPortfolio || typeof Chart === 'undefined') return;
+
+      new Chart(elBroker.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+          datasets: [
+            {
+              label: 'Annual Premium ($000s)',
+              data: [285, 310, 335, 365, 395, 425],
+              borderColor: '#dc2626',
+              backgroundColor: 'rgba(220, 38, 38, 0.10)',
+              tension: 0.3
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 3500,
-                    easing: 'easeOutBounce'
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'bottom'
-                    }
-                }
+            {
+              label: 'Industry Benchmark ($000s)',
+              data: [285, 300, 315, 330, 345, 362],
+              borderColor: '#059669',
+              backgroundColor: 'rgba(5, 150, 105, 0.10)',
+              tension: 0.3,
+              borderDash: [5, 5]
             }
-        });
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: true, position: 'bottom' } }
+        }
+      });
 
-        const ctx2 = document.getElementById('coverageChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Cyber', 'D&O Gap', 'EPLI', 'Supply Chain', 'Political Risk'],
-                datasets: [{
-                    label: 'Uninsured Exposure ($M)',
-                    data: [4.2, 2.1, 1.2, 0.8, 0.2],
-                    backgroundColor: ['#dc2626', '#dc2626', '#f59e0b', '#f59e0b', '#f59e0b']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 3500,
-                    delay: 500,
-                    easing: 'easeOutBounce'
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
+      new Chart(elCoverage.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['Cyber', 'D&O Gap', 'EPLI', 'Supply Chain', 'Political Risk'],
+          datasets: [{
+            label: 'Uninsured Exposure ($M)',
+            data: [4.2, 2.1, 1.2, 0.8, 0.2],
+            backgroundColor: ['#dc2626', '#dc2626', '#f59e0b', '#f59e0b', '#f59e0b']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
 
-        const ctx3 = document.getElementById('savingsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['Broker RFP', 'Loss Prevention', 'Coverage Optimization'],
-                datasets: [{
-                    data: [65, 28, 15],
-                    backgroundColor: ['#008080', '#059669', '#10b981']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 3500,
-                    delay: 1000,
-                    easing: 'easeOutBounce',
-                    animateRotate: true,
-                    animateScale: true
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
+      new Chart(elSavings.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Broker RFP', 'Loss Prevention', 'Coverage Optimization'],
+          datasets: [{
+            data: [65, 28, 15],
+            backgroundColor: ['#008080', '#059669', '#10b981']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
 
-        const ctx4 = document.getElementById('portfolioChart').getContext('2d');
-        new Chart(ctx4, {
-            type: 'bar',
-            data: {
-                labels: ['GL', 'Property', 'WC', 'Auto', 'D&O', 'Umbrella', 'Cyber*', 'EPLI*'],
-                datasets: [{
-                    label: 'Annual Premium ($000s)',
-                    data: [85, 75, 120, 45, 60, 40, 0, 0],
-                    backgroundColor: function(context) {
-                        const value = context.parsed.y;
-                        return value === 0 ? '#dc2626' : '#008080';
-                    }
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 3500,
-                    delay: 1500,
-                    easing: 'easeOutBounce'
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
+      new Chart(elPortfolio.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['GL', 'Property', 'WC', 'Auto', 'D&O', 'Umbrella', 'Cyber*', 'EPLI*'],
+          datasets: [{
+            label: 'Annual Premium ($000s)',
+            data: [85, 75, 120, 45, 60, 40, 0, 0],
+            backgroundColor: function (context) {
+              const value = context.parsed.y;
+              return value === 0 ? '#dc2626' : '#008080';
             }
-        });
-    </script>
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
